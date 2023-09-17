@@ -1,4 +1,4 @@
-import 'package:ecommerce_task3/screens/app_colors.dart';
+import 'package:ecommerce_task3/app_colors.dart';
 import 'package:flutter/material.dart';
 import'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,20 +25,23 @@ class AppComponents{
       {required BuildContext context, required String image,
         required String text,
         required String price}) =>
-      SizedBox(
-        width: MediaQuery.of(context).size.width*0.35,
-        height: MediaQuery.of(context).size.height*0.38,
+      Container(
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 5),
+        width: MediaQuery.of(context).size.width*0.33,
+        height: MediaQuery.of(context).size.height*0.33,
         child: Column(
           children: [
             Stack(
               children: [
                 Container(
+                  height: MediaQuery.of(context).size.height*0.18,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    image: DecorationImage(image: NetworkImage(image),fit: BoxFit.contain)
                   ),
-                  child: Image.asset(image),
+                 // child: Image.network(image,height: MediaQuery.of(context).size.height*0.2,fit: BoxFit.fill,),
                 ),
                 Positioned(
                   right: MediaQuery.of(context).size.width*0.02,
