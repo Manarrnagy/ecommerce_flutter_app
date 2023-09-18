@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_task3/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -110,14 +111,23 @@ class AppComponents {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                //image: DecorationImage(image: NetworkImage(images[1]))
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-              ),
-              child: Image.network(images[1]),
-            ),
+        CarouselSlider(
+        options: CarouselOptions(
+          autoPlay: true,
+        disableCenter: true,
+        ),
+        items: images
+            .map((item) => Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            //image: DecorationImage(image: NetworkImage(images[1]))
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+          ),
+          child: Image.network(item, fit: BoxFit.cover, width: 1000),
+
+        ),).toList()
+            .toList(),
+      ),
             titleText(text: title),
             bodyText(text: description),
             titleText(text: "\$$price", size: 18),
