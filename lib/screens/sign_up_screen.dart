@@ -5,19 +5,19 @@ import 'package:ecommerce_task3/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignupScreenState extends State<SignupScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController confrimPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
@@ -43,20 +43,22 @@ class _SignUpState extends State<SignUp> {
                 pass,
                 phone,
                 value.user!.uid,
-              ).then((value) {
-                if (value) {
-                  setState(() {
-                    isLoading = false;
-                  });
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
-                    ),
-                    (route) => false,
-                  );
-                }
-              });
+              ).then(
+                (value) {
+                  if (value) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  }
+                },
+              );
             }
           },
         );
@@ -76,8 +78,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<bool> saveUserData(
-      String username,
-      String email,
+    String username,
+    String email,
     String pass,
     String? phone,
     String uid,
@@ -108,7 +110,17 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppComponents.borderedContainer(widget: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.navyBlue,), widthPercent: 0.1, heightPercent: 0.05, context: context, funOnTap: (){Navigator.pop(context);}),
+              AppComponents.borderedContainer(
+                  widget: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: AppColors.navyBlue,
+                  ),
+                  widthPercent: 0.1,
+                  heightPercent: 0.05,
+                  context: context,
+                  funOnTap: () {
+                    Navigator.pop(context);
+                  }),
               AppComponents.titleText(
                   text: "Welcome back! Glad\nto see you, Again!",
                   size: 28,
@@ -120,14 +132,15 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     Form(
                       child: AppComponents.customFormField(
-                          context: context,
-                          fieldController: usernameController,
-                          hint: "Username",
-                          validatorString: (String val) {
-                            if (val.length < 4) {
-                              return "username must have more than 4 characters";
-                            }
-                          }),
+                        context: context,
+                        fieldController: usernameController,
+                        hint: "Username",
+                        validatorString: (String val) {
+                          if (val.length < 4) {
+                            return "username must have more than 4 characters";
+                          }
+                        },
+                      ),
                     ),
                     Form(
                       child: AppComponents.customFormField(
@@ -145,19 +158,20 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Form(
                       child: AppComponents.customFormField(
-                          context: context,
-                          fieldController: passwordController,
-                          hint: "Password",
-                          validatorString: (String val) {
-                            if (val.length < 9) {
-                              return "Passwords must have at least 9 characters";
-                            }
-                          }),
+                        context: context,
+                        fieldController: passwordController,
+                        hint: "Password",
+                        validatorString: (String val) {
+                          if (val.length < 9) {
+                            return "Passwords must have at least 9 characters";
+                          }
+                        },
+                      ),
                     ),
                     Form(
                         child: AppComponents.customFormField(
                             context: context,
-                            fieldController: confrimPasswordController,
+                            fieldController: confirmPasswordController,
                             hint: "Confirm password",
                             validatorString: (String val) {
                               if (val != passwordController.value) {
@@ -168,9 +182,12 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               AppComponents.solidButton(
-
                   fun: () {
-                    signUp(email: emailController.text, pass: passwordController.text, username: usernameController.text);},
+                    signUp(
+                        email: emailController.text,
+                        pass: passwordController.text,
+                        username: usernameController.text);
+                  },
                   widget: Text(
                     "Sign up",
                     style: TextStyle(color: Colors.white, fontSize: 20),
