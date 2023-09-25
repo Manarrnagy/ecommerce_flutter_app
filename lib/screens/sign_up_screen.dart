@@ -30,9 +30,8 @@ class _SignupScreenState extends State<SignupScreen> {
   }) async {
     if (formKey.currentState!.validate()) {
       FocusScope.of(context).unfocus();
-      ;
       try {
-        await FirebaseAuth.instance
+         FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: pass)
             .then(
           (value) {
@@ -41,7 +40,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 username,
                 email,
                 pass,
-                phone,
                 value.user!.uid,
               ).then(
                 (value) {
@@ -81,7 +79,6 @@ class _SignupScreenState extends State<SignupScreen> {
     String username,
     String email,
     String pass,
-    String? phone,
     String uid,
   ) async {
     try {
@@ -89,9 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
         'userName': username,
         'userEmail': email,
         'userPass': pass,
-        'userPhone': "",
         'uid': uid,
-        'image': '',
       }, SetOptions(merge: true));
       return true;
     } catch (e) {
