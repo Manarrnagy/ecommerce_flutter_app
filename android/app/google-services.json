@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "34130246658",
+    "project_id": "ecommerce-ict",
+    "storage_bucket": "ecommerce-ict.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34130246658:android:a9a6ae234e983fd92cfb1b",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_task3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOd1NlltLjF1zLJc_RuaFyBoqeMMd9Xus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Future<ProductsResponse> getData() async {
     final response =
-    await http.get(Uri.parse("${AppConstants.rootUrl}products"));
+        await http.get(Uri.parse("${AppConstants.rootUrl}products"));
     late ProductsResponse productsResponse;
     if (response.statusCode == 200) {
       productsResponse = ProductsResponse.fromJson(jsonDecode(response.body));
@@ -56,34 +56,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: "New Products", align: TextAlign.start),
             isLoading
                 ? Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.8,
-              child: CircularProgressIndicator(),
-            )
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: CircularProgressIndicator(),
+                  )
                 : SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.8,
-              child: GridView.builder(
-                itemCount: productsList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, i) {
-                  return AppComponents.productGridItem(
-                    context: context,
-                    image: productsList[i].thumbnail!,
-                    text: productsList[i].title!,
-                    price: productsList[i].price.toString(),
-                  callback:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetailsScreen(images: productsList[i].images!, title: productsList[i].title!, description: productsList[i].description!, price: productsList[i].price!.toDouble())))
-                  );
-                },
-              ),
-            ),
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: GridView.builder(
+                      itemCount: productsList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
+                      itemBuilder: (context, i) {
+                        return AppComponents.productGridItem(
+                            context: context,
+                            image: productsList[i].thumbnail!,
+                            text: productsList[i].title!,
+                            price: productsList[i].price.toString(),
+                            callback: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailsScreen(
+                                        images: productsList[i].images!,
+                                        title: productsList[i].title!,
+                                        description:
+                                            productsList[i].description!,
+                                        price: productsList[i]
+                                            .price!
+                                            .toDouble()))));
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
